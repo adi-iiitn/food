@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order Website</title>
+    <link rel="stylesheet" href="food.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#" id="cartButton">Cart (<span id="cartCount">0</span>)</a></li>
+        </ul>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search products...">
+    </div>
+
+    <!-- Products Section -->
+    <div class="products" id="productsContainer">
+        <div class="product" data-id="1" data-name="Pizza">
+            <img src="https://via.placeholder.com/150" alt="Pizza">
+            <h3>Pizza</h3>
+            <p>$12.99</p>
+            <button class="addToCart">Add to Cart</button>
+        </div>
+        <div class="product" data-id="2" data-name="Burger">
+            <img src="https://via.placeholder.com/150" alt="Burger">
+            <h3>Burger</h3>
+            <p>$8.99</p>
+            <button class="addToCart">Add to Cart</button>
+        </div>
+        <div class="product" data-id="3" data-name="Pasta">
+            <img src="https://via.placeholder.com/150" alt="Pasta">
+            <h3>Pasta</h3>
+            <p>$10.99</p>
+            <button class="addToCart">Add to Cart</button>
+        </div>
+        <div class="product" data-id="4" data-name="Sushi">
+            <img src="https://via.placeholder.com/150" alt="Sushi">
+            <h3>Sushi</h3>
+            <p>$15.99</p>
+            <button class="addToCart">Add to Cart</button>
+        </div>
+        <div class="product" data-id="5" data-name="Salad">
+            <img src="https://via.placeholder.com/150" alt="Salad">
+            <h3>Salad</h3>
+            <p>$6.99</p>
+            <button class="addToCart">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <h3>Total: $<span id="totalAmount">0</span></h3>
+            <button id="checkoutButton">Checkout</button>
+        </div>
+    </div>
+
+    <script src="food.js"></script>
+</body>
+</html>
