@@ -1,272 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-Commerce Navbar</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="food.css">
+  <title>AI Object Detection Professional</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #2196f3;
+      color: white;
+      padding: 15px 0;
+      font-weight: 600;
+      font-size: 1.8rem;
+      box-shadow: 0 2px 6px rgba(33, 150, 243, 0.4);
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      width: 90vw;
+    }
+
+    #video,
+    #c1 {
+      width: 100%;
+      max-height: 60vh;
+      border-radius: 12px;
+      border: 2px solid #2196f3;
+      box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+      background: black;
+      object-fit: contain;
+    }
+
+    #loadingText {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 20px;
+      min-height: 24px;
+    }
+
+    .controls {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .control-group {
+      background: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      min-width: 150px;
+      flex-grow: 1;
+      max-width: 300px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    #detectionsList {
+      margin-top: 20px;
+      text-align: left;
+      max-height: 150px;
+      overflow-y: auto;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-size: 0.9rem;
+    }
+
+    #detectionsList ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    footer {
+      padding: 15px 10px;
+      background-color: #2196f3;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 -2px 6px rgba(33, 150, 243, 0.4);
+      margin-top: auto;
+    }
+
+    .btn-custom {
+      background-color: #1976d2 !important;
+      color: white !important;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <nav class="navbar">
-    <!-- Logo -->
-    <div class="logo">
-      <a href="#">BLINKART</a>
-    </div>
+  <header>AI Object Detection Pro</header>
 
-    <!-- Menu Links -->
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Shop</a></li>
-      <li><a href="#">Categories</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <main>
+    <div id="loadingText">Initializing camera and AI model...</div>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <input type="text" placeholder="Search products...">
-      <button><i class="fas fa-search"></i></button>
-    </div>
+    <!-- Video hidden for direct feed, canvas shows output -->
+    <video id="video" playsinline autoplay muted style="display:none;"></video>
+    <canvas id="c1"></canvas>
 
-    <!-- Icons -->
-    <div class="nav-icons">
-      <a href="#"><i class="fas fa-shopping-cart"></i></a>
-      <a href="#"><i class="fas fa-user"></i></a>
-      <a href="#"><i class="fas fa-heart"></i></a>
-    </div>
-
-    <!-- Mobile Menu Toggle -->
-    <div class="menu-toggle" id="mobile-menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-  </nav>
-
-   <!-- Hero Section -->
-   <section class="hero">
-    <!-- Sliding Background Images -->
-    <div class="hero-slider">
-      <div class="slide active" style="background-image: url('gg1.jpeg');"></div>
-      <div class="slide" style="background-image: url('SEZWAN\ BURGR.jpg');"></div>
-      <div class="slide" style="background-image: url('gg.jpeg');"></div>
-    </div>
-
-    <!-- Hero Content -->
-    <div class="hero-content">
-      <h1>Discover the Latest Trends</h1>
-      <p>Shop the newest collection of fashion, electronics, and more.</p>
-      <a href="heloo1.html" class="shop-now-btn">Shop Now</a>
-    </div>
-
-    <!-- Slider Controls -->
-    <button class="slider-control prev" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
-    <button class="slider-control next" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
-  </section>
-
-
- <!-- Featured Products Section -->
- <section class="featured-products">
-    <h2>Featured Products</h2>
-    <div class="product-grid">
-      <!-- Product 1 -->
-      <div class="product-card">
-        <img src="https://tse3.mm.bing.net/th?id=OIP.OYMVmCW8zL-pmzmEWLeydwHaHa&pid=Api&P=0&h=180" alt="Product 1">
-        <h3>Product Name 1</h3>
-        <p class="price">$49.99</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product-card">
-        <img src="https://tse3.mm.bing.net/th?id=OIP.fKhfWuB-7gvAfxQ-MruY3wHaJm&pid=Api&P=0&h=180" alt="Product 2">
-        <h3>Product Name 2</h3>
-        <p class="price">$59.99</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-     
-       <!-- Product 3 -->
-       <div class="product-card">
-        <img src="https://tse2.mm.bing.net/th?id=OIP.LgpKLkwCjGfaqrSay9XRLgHaHa&pid=Api&P=0&h=180" alt="Product 3">
-        <h3>Product Name 3</h3>
-        <p class="price">$39.99</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-      <!-- Product 4 -->
-      <div class="product-card">
-        <img src="https://tse1.mm.bing.net/th?id=OIP.kXl46WePQsAfRqCukeAzCQHaHa&pid=Api&P=0&h=180" alt="Product 4">
-        <h3>Product Name 4</h3>
-        <p class="price">$69.99</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-      <!-- Product 5 -->
-      <div class="product-card">
-        <img src="https://tse2.mm.bing.net/th?id=OIP.RZilxNZXXiIXlCcMbqt8wAHaIV&pid=Api&P=0&h=180.jpg" alt="Product 5">
-        <h3>Product Name 5</h3>
-        <p class="price">$29.99</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-
-       <!-- Product 6 -->
-       <div class="product-card">
-        <img src="https://tse1.mm.bing.net/th?id=OIP.a9OVxpC8Wbkz21Bp7J7RzgHaHa&pid=Api&P=0&h=180" alt="Product 6">
-        <h3>Product Name 6</h3>
-        <p class="price">$79.99</p>
-        <button class="add-to-cart-btn">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
- <!-- Product Categories Section -->
- <section class="product-categories">
-    <h2>Men's Fashion Categories</h2>
-    <div class="category-grid">
-      <!-- Category 1: Shirts -->
-      <div class="category-card">
-        <i class="fas fa-tshirt"></i>
-        <h3>Shirts</h3>
-      </div>
-
-      <!-- Category 2: Pants -->
-      <div class="category-card">
-        <i class="fas fa-vest"></i>
-        <h3>Pants</h3>
-      </div>
-
-      <!-- Category 3: Shoes -->
-      <div class="category-card">
-        <i class="fas fa-shoe-prints"></i>
-        <h3>Shoes</h3>
-      </div>
-
-      <!-- Category 4: Accessories -->
-      <div class="category-card">
-        <i class="fas fa-glasses"></i>
-        <h3>Accessories</h3>
-      </div>
-
-      <!-- Category 5: Jackets -->
-      <div class="category-card">
-        <i class="fas fa-jacket"></i>
-        <h3>Jackets</h3>
-      </div>
-
-      <!-- Category 6: Watches -->
-      <div class="category-card">
-        <i class="fas fa-clock"></i>
-        <h3>Watches</h3>
-      </div>
-    </div>
-  </section>
-   
-
-   <!-- About Us Section -->
-   <section class="about-us">
-    <div class="about-content">
-      <h2>About Us</h2>
-      <p class="intro">
-        Welcome to <strong>MyStore</strong>, your one-stop destination for the latest trends in fashion, electronics, and lifestyle products. We are passionate about delivering high-quality products that inspire and empower our customers.
-      </p>
-      <p class="unique">
-        What makes us unique is our commitment to <strong>quality</strong>, <strong>affordability</strong>, and <strong>exceptional customer service</strong>. We carefully curate our collections to ensure you get the best value for your money.
-      </p>
-    </div>
-    <div class="about-image">
-      <img src="https://tse1.mm.bing.net/th?id=OIP.vhc6ULhBdX-2pAsSMlyWrAHaE8&pid=Api&P=0&h=180" alt="Our Team">
-    </div>
-  </section>
-
-
- <!-- Contact & Support Section -->
- <section class="contact-support">
-    <h2>Contact & Support</h2>
-    <div class="contact-container">
-      <!-- Contact Form -->
-      <div class="contact-form">
-        <h3>Get in Touch</h3>
-        <form>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Submit</button>
-        </form>
-      </div>
-
-       <!-- FAQ Accordion -->
-       <div class="faq">
-        <h3>Frequently Asked Questions</h3>
-        <div class="faq-item">
-          <button class="faq-question">How do I track my order?<i class="fas fa-chevron-down"></i></button>
-          <div class="faq-answer">
-            <p>You can track your order by logging into your account and visiting the "Order History" section. You will receive a tracking number via email once your order is shipped.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">What is your return policy?<i class="fas fa-chevron-down"></i></button>
-          <div class="faq-answer">
-            <p>We offer a 30-day return policy for most items. Please ensure the product is unused and in its original packaging. Visit our Returns page for more details.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">How can I contact customer support?<i class="fas fa-chevron-down"></i></button>
-          <div class="faq-answer">
-            <p>You can contact our customer support team via the contact form on this page, or email us directly at support@mystore.com. We typically respond within 24 hours.</p>
+    <div class="controls">
+      <div class="control-group">
+        <label for="aiToggle">Enable AI Detection</label>
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox" id="aiToggle" disabled />
+            <span class="lever"></span>
+            On
+          </label>
         </div>
       </div>
-      <div class="faq-item">
-        <button class="faq-question">Do you offer international shipping?<i class="fas fa-chevron-down"></i></button>
-        <div class="faq-answer">
-          <p>Yes, we offer international shipping to most countries. Shipping costs and delivery times vary depending on your location.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-
-
- <!-- Footer Section -->
- <footer class="footer">
-    <div class="footer-content">
-      <!-- Footer Links -->
-      <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Return Policy</a>
+      <div class="control-group">
+        <label for="fpsRange">FPS: <span id="fpsValue">10</span></label>
+        <p class="range-field">
+          <input type="range" id="fpsRange" min="1" max="30" value="10" />
+        </p>
       </div>
 
-      <!-- Social Media Icons -->
-      <div class="social-icons">
-        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      <div class="control-group">
+        <label for="confidenceRange">Confidence Threshold: <span id="confValue">0.5</span></label>
+        <p class="range-field">
+          <input type="range" id="confidenceRange" min="0" max="1" step="0.05" value="0.5" />
+        </p>
+      </div>
+
+      <div class="control-group">
+        <label for="cameraSelect">Camera</label>
+        <select id="cameraSelect" class="browser-default" disabled>
+          <option value="user">Front Camera</option>
+          <option value="environment" selected>Back Camera</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <button id="toggleCameraBtn" class="btn btn-custom">Turn Camera Off</button>
+      </div>
+
+      <div class="control-group">
+        <button id="captureBtn" class="btn btn-custom">Capture Snapshot</button>
       </div>
     </div>
 
-    <!-- Copyright -->
-    <div class="copyright">
-      <p>&copy; 2023 MyStore. All rights reserved.</p>
+    <div id="detectionsList">
+      <strong>Detected Objects:</strong>
+      <ul id="objectsUl">
+        <li>No objects detected yet.</li>
+      </ul>
     </div>
-  </footer>
+  </main>
 
+  <footer>Made with ❤️ by AI Enthusiasts using ml5.js & TensorFlow.js</footer>
 
+  <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('c1');
+    const ctx = canvas.getContext('2d');
+    const loadingText = document.getElementById('loadingText');
 
+    const aiToggle = document.getElementById('aiToggle');
+    const fpsRange = document.getElementById('fpsRange');
+    const fpsValue = document.getElementById('fpsValue');
+    const confidenceRange = document.getElementById('confidenceRange');
+    const confValue = document.getElementById('confValue');
+    const cameraSelect = document.getElementById('cameraSelect');
+    const toggleCameraBtn = document.getElementById('toggleCameraBtn');
+    const captureBtn = document.getElementById('captureBtn');
 
+    const objectsUl = document.getElementById('objectsUl');
 
+    let model, detections = [];
+    let modelIsLoaded = false;
+    let aiEnabled = false;
+    let lastDetectionTime = 0;
+    let fps = parseInt(fpsRange.value);
+    let confidenceThreshold = parseFloat(confidenceRange.value);
+    let currentStream = null;
+    let cameraOn = true;
 
-  <script src="food.js"></script>
+    // Initialize camera with selected facingMode
+    async function setupCamera(facingMode = 'environment') {
+      if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: facingMode },
+          audio: false
+        });
+        currentStream = stream;
+        video.srcObject = stream;
+        await video.play();
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        loadingText.textContent = 'Camera started. Loading AI model...';
+        cameraSelect.disabled = false;
+        toggleCameraBtn.textContent = 'Turn Camera Off';
+        cameraOn = true;
+      } catch (err) {
+        loadingText.textContent = 'Error accessing camera: ' + err.message;
+        cameraSelect.disabled = true;
+        toggleCameraBtn.disabled = true;
+        console.error(err);
+      }
+    }
+
+    // Load the object detection model
+    function loadModel() {
+      loadingText.textContent = 'Loading AI model...';
+      ml5.objectDetector('cocossd')
+        .then(loadedModel => {
+          model = loadedModel;
+          modelIsLoaded = true;
+          loadingText.textContent = 'Model loaded. Enable AI detection.';
+          aiToggle.disabled = false;
+        })
+        .catch(err => {
+          loadingText.textContent = 'Error loading model: ' + err.message;
+          console.error(err);
+        });
+    }
+
+    // Draw video and detections on canvas
+    function drawCanvas() {
+      if (!video.videoWidth) return;
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      if (aiEnabled && detections.length > 0) {
+        detections.forEach(det => {
+          if (det.confidence >= confidenceThreshold) {
+            ctx.strokeStyle = '#2196f3';
+            ctx.lineWidth = 3;
+            ctx.font = '16px Poppins';
+            ctx.fillStyle = '#2196f3';
+
+            ctx.beginPath();
+            ctx.rect(det.x, det.y, det.width, det.height);
+            ctx.stroke();
+
+            ctx.fillText(
+              `${det.label} ${(det.confidence * 100).toFixed(1)}%`,
+              det.x + 5,
+              det.y > 20 ? det.y - 5 : det.y + 20
+            );
+          }
+        });
+      }
+    }
+
+    // Update detections list below canvas
+    function updateDetectionsList() {
+      objectsUl.innerHTML = '';
+      if (aiEnabled && detections.length > 0) {
+        detections.forEach(det => {
+          if (det.confidence >= confidenceThreshold) {
+            const li = document.createElement('li');
+            li.textContent = `${det.label} — ${(det.confidence * 100).toFixed(1)}% confidence`;
+            objectsUl.appendChild(li);
+          }
+        });
+      }
+      if (objectsUl.children.length === 0) {
+        objectsUl.innerHTML = '<li>No objects detected above threshold.</li>';
+      }
+    }
+
+    // Detection loop based on FPS setting
+    async function detectionLoop() {
+      if (!modelIsLoaded || !aiEnabled || !cameraOn) {
+        drawCanvas();
+        requestAnimationFrame(detectionLoop);
+        return;
+      }
+
+      const now = performance.now();
+      if (now - lastDetectionTime > (1000 / fps)) {
+        try {
+          const results = await model.detect(video);
+          detections = results;
+          lastDetectionTime = now;
+          updateDetectionsList();
+        } catch (error) {
+          console.error('Detection error:', error);
+          loadingText.textContent = 'Detection error: ' + error.message;
+        }
+      }
+
+      drawCanvas();
+      requestAnimationFrame(detectionLoop);
+    }
+
+    // Event handlers
+    aiToggle.addEventListener('change', () => {
+      aiEnabled = aiToggle.checked;
+      if (!aiEnabled) {
+        detections = [];
+        updateDetectionsList();
+        drawCanvas();
+      }
+    });
+
+    fpsRange.addEventListener('input', () => {
+      fps = parseInt(fpsRange.value);
+      fpsValue.textContent = fps;
+    });
+
+    confidenceRange.addEventListener('input', () => {
+      confidenceThreshold = parseFloat(confidenceRange.value);
+      confValue.textContent = confidenceThreshold.toFixed(2);
+      updateDetectionsList();
+    });
+
+    cameraSelect.addEventListener('change', () => {
+      setupCamera(cameraSelect.value);
+    });
+
+    toggleCameraBtn.addEventListener('click', () => {
+      if (cameraOn) {
+        if (currentStream) {
+          currentStream.getTracks().forEach(track => track.stop());
+        }
+        loadingText.textContent = 'Camera is off';
+        cameraOn = false;
+        toggleCameraBtn.textContent = 'Turn Camera On';
+        aiToggle.disabled = true;
+        aiToggle.checked = false;
+        aiEnabled = false;
+        detections = [];
+        updateDetectionsList();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      } else {
+        setupCamera(cameraSelect.value);
+        loadingText.textContent = 'Camera restarting...';
+        aiToggle.disabled = !modelIsLoaded;
+        toggleCameraBtn.textContent = 'Turn Camera Off';
+        cameraOn = true;
+      }
+    });
+
+    captureBtn.addEventListener('click', () => {
+      const image = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = `snapshot_${Date.now()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // Start everything
+    (async () => {
+      await setupCamera(cameraSelect.value);
+      loadModel();
+      detectionLoop();
+    })();
+  </script>
 </body>
+
 </html>
